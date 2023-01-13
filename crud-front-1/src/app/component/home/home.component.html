@@ -1,0 +1,58 @@
+<button
+  (click)="createPatient()"
+  mat-fab
+  color="primary"
+  aria-label="Example icon button with a delete icon"
+>
+  <h2>+</h2>
+</button>
+
+<app-patients></app-patients>
+
+<ng-template #modalNewPatient>
+  <div class="modal-header">
+    <h1 class="mb-2 mt-0">Criar Paciente</h1>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="formCreatePatient" class="row">
+      <mat-form-field appearance="outline" class="col-md-6 col-12">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <div formGroupName="address" class="col-md-6 col-12 row">
+        <mat-form-field appearance="outline" class="col-md-8 col-6">
+          <mat-label>Cidade</mat-label>
+          <input matInput formControlName="city" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-4 col-6">
+          <mat-label>uf</mat-label>
+          <input matInput formControlName="uf" />
+        </mat-form-field>
+      </div>
+      <mat-form-field appearance="outline" class="col-md-4 col-12">
+        <mat-label>Telefone</mat-label>
+        <input matInput formControlName="phone" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-md-8 col-12">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          formControlName="email"
+          placeholder="Ex. pat@example.com"
+        />
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div class="modal-footer col-lg-12">
+    <button mat-button color="primary" class="mr-1" (click)="closeModal()">
+      Cancelar
+    </button>
+    <button mat-raised-button color="primary" (click)="postPacient()" type="submit">
+      Adicionar paciente
+    </button>
+  </div>
+</ng-template>
