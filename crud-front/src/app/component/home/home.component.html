@@ -6,8 +6,71 @@
 >
   <h2>+</h2>
 </button>
+<button
+  (click)="createDoctor()"
+  mat-fab
+  color="primary"
+  aria-label="Example icon button with a delete icon"
+>
+  <h2>+</h2>
+</button>
 
-<app-patients></app-patients>
+<app-doctors></app-doctors>
+<div class="mt-4">
+  <app-patients></app-patients>
+</div>
+<app-autocomplete></app-autocomplete>
+
+<ng-template #modalNewDoctor>
+  <div class="modal-header">
+    <h1 class="mb-2 mt-0">Criar Medico</h1>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="formCreateDoctor" class="row">
+      <mat-form-field appearance="outline" class="col-md-6 col-12">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-4 col-12">
+        <mat-label>crm</mat-label>
+        <input matInput formControlName="crm" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-8 col-12">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          formControlName="email"
+          placeholder="Ex. pat@example.com"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Especialidade</mat-label>
+        <mat-select formControlName="specialty">
+          <mat-option *ngFor="let item of options">Clear</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div class="modal-footer col-lg-12">
+    <button mat-button color="primary" class="mr-1" (click)="closeModal()">
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="postPacient()"
+      type="submit"
+    >
+      Adicionar paciente
+    </button>
+  </div>
+</ng-template>
+
+<!--============================================================-->
 
 <ng-template #modalNewPatient>
   <div class="modal-header">
@@ -51,7 +114,12 @@
     <button mat-button color="primary" class="mr-1" (click)="closeModal()">
       Cancelar
     </button>
-    <button mat-raised-button color="primary" (click)="postPacient()" type="submit">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="postPacient()"
+      type="submit"
+    >
       Adicionar paciente
     </button>
   </div>

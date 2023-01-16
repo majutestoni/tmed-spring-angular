@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ServicesUrls } from 'src/app/@core/servicesUrls';
 import { map, pluck, tap } from 'rxjs/operators';
 import { Patient } from './patients/patients.component';
+import { Doctor } from './doctors/doctors.component';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +18,18 @@ export class HomeService {
       .pipe(pluck('content'));
   }
 
+  getDoctors(): Observable<any> {
+    return this.http
+      .get<Doctor>(`${ServicesUrls.BACK_LOCAL}/doctor`)
+      .pipe(pluck('content'));
+  }
+
   postPatient(headers: CreatePatient): Observable<any> {
     return this.http.post(`${ServicesUrls.BACK_LOCAL}/patient`, headers);
+  }
+
+  deletePatient(headers: number): Observable<any> {
+    return this.http.delete(`${ServicesUrls.BACK_LOCAL}/patient/${headers}`);
   }
 }
 

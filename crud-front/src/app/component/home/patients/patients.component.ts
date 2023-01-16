@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HomeService } from '../home.service';
 
 @Component({
@@ -8,18 +8,21 @@ import { HomeService } from '../home.service';
 })
 export class PatientsComponent implements OnInit {
   constructor(private homeService: HomeService) {}
-  public patients: Patient[] = []
-  displayedColumns: string[] = ['name', 'email', 'phone'];
+  public patients: Patient[] = [];
+  displayedColumns: string[] = ['name', 'email', 'phone', 'options'];
 
   ngOnInit(): void {
-    this.homeService.getPatients().subscribe((res) => this.patients = res);
-    console.log(this.patients)
+    this.homeService.getPatients().subscribe((res) => (this.patients = res));
+  }
+
+  deletePatient(id: number): void {
+    this.homeService.deletePatient(id).subscribe((res) => this.ngOnInit());
   }
 }
 
-export interface Patient{
-  id: number
-  name: string
-  email: string
-  phone: string
+export interface Patient {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
 }

@@ -10,3 +10,14 @@ h2 {
   margin-left: 0.1rem;
   width: 100%;
 }
+
+.options-dropdown {
+  z-index: 1;
+  box-shadow: 1px 1px 10px rgba(#000, 0.2);
+  animation: fadein 125ms forwards;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 4px;
+  color: #999999;
+  text-transform: none;
+}
