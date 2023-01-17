@@ -1,25 +1,31 @@
-<button
-  (click)="createPatient()"
-  mat-fab
-  color="primary"
-  aria-label="Example icon button with a delete icon"
->
-  <h2>+</h2>
-</button>
-<button
-  (click)="createDoctor()"
-  mat-fab
-  color="primary"
-  aria-label="Example icon button with a delete icon"
->
-  <h2>+</h2>
-</button>
-
-<app-doctors></app-doctors>
-<div class="mt-4">
-  <app-patients></app-patients>
+<div class="ml-5">
+  <div class="mt-4 d-flex doctors">
+    <button
+      (click)="createDoctor()"
+      mat-fab
+      color="primary"
+      aria-label="Example icon button with a delete icon"
+    >
+      <h2>+</h2>
+    </button>
+    <div class="doctors">
+      <app-doctors></app-doctors>
+    </div>
+  </div>
+  <div class="mt-4 d-flex doctors">
+    <button
+      (click)="createPatient()"
+      mat-fab
+      color="primary"
+      aria-label="Example icon button with a delete icon"
+    >
+      <h2>+</h2>
+    </button>
+    <div class="doctors">
+      <app-patients></app-patients>
+    </div>
+  </div>
 </div>
-<app-autocomplete></app-autocomplete>
 
 <ng-template #modalNewDoctor>
   <div class="modal-header">
@@ -46,12 +52,13 @@
         />
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Especialidade</mat-label>
-        <mat-select formControlName="specialty">
-          <mat-option *ngFor="let item of options">Clear</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        formControlName="specialty"
+      >
+        <option [value]="item" *ngFor="let item of options">{{ item }}</option>
+      </select>
     </form>
   </div>
 
@@ -62,10 +69,10 @@
     <button
       mat-raised-button
       color="primary"
-      (click)="postPacient()"
+      (click)="postDoctor()"
       type="submit"
     >
-      Adicionar paciente
+      Adicionar medico
     </button>
   </div>
 </ng-template>

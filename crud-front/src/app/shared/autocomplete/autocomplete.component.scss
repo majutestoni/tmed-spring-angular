@@ -1,9 +1,14 @@
-.autocomplete {
-  width: 240px;
-}
-
 .teste {
   width: 100%;
+}
+
+input:focus {
+  outline: 0;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
 }
 
 .mat-form-field-wrapper {
@@ -13,21 +18,30 @@
 p {
   margin: 1% 4%;
   cursor: pointer;
-  animation: fadein 125ms forwards;
 }
 
-.item:hover{
-  background-color: #cfcfcf;
-  color: #000;
+.item {
+  transition: 500ms linear;
+}
 
+.item:hover {
+  transform: scale(1.1);
+  background-color: #e6e6e6ef;
+  color: rgb(41, 41, 41);
+
+  p {
+    margin-left: 5%;
+    margin-top: 1%;
+  }
 }
 .options-dropdown {
+  width: 40%;
+  margin-top: -3%;
+  position: absolute;
   z-index: 1;
-  top: 3rem !important;
-  box-shadow: 1px 1px 10px rgba(#000, 0.2);
-  animation: fadein 125ms forwards;
-  width: 100%;
-  overflow-y: auto;
+  box-shadow: 1px 3px 10px rgba(#000, 0.2);
+  overflow-y: 250px;
+  overflow-x: auto;
   background-color: #ffffff;
   border-radius: 4px;
   word-wrap: normal;

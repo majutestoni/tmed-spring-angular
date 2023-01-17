@@ -1,5 +1,15 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { FormBuilder, FormControl, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
@@ -9,26 +19,21 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
   styleUrls: ['./autocomplete.component.scss'],
 })
 export class AutocompleteComponent implements OnInit, OnChanges {
-  public list: string[] = [
-    'nome',
-    'sobrenome',
-    'nome do meio',
-    'apelido',
-    'name',
-    'diminutivo',
-    'parecido',
-  ];
+  @Input() public list: string[] = [];
   public listPesquisa = [];
   public input = new FormControl();
+  @Input() control = '';
   public filtro$: Observable<any> | undefined;
   public isSearch = false;
   public hide = false;
+  @Input() public placeholde = '';
+  @Input() public value = '';
+  @Input() public label = '';
 
-
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private elementRef: ElementRef) {}
 
   ngOnChanges(): void {
-    this.changeHide()
+    this.changeHide();
   }
 
   ngOnInit(): void {
@@ -40,10 +45,13 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     );
   }
 
-  changeHide(){
-    this.hide
-    ? this.hide = false
-    : this.hide = true
+  changeHide() {
+    this.hide = !this.hide;
+  }
+
+  selectOption(item: any) {
+    this.placeholde = item;
+    console.log(this.placeholde);
   }
 
   searchValues(searchTerm: string) {

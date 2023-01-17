@@ -23,9 +23,6 @@ export class HomeComponent implements OnInit {
 
   public formCreatePatient!: FormGroup;
   public formCreateDoctor!: FormGroup;
-  public specialty = new FormControl();
-
-  public options$!: Observable<any>;
 
   public options = [
     'ORTHOPEDIST',
@@ -43,20 +40,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    this.options$ = this.specialty.valueChanges.pipe(
-      debounceTime(200),
-      map((value) => value.trim()),
-      tap(() => console.log('teste')),
-      distinctUntilChanged(),
-      map((res) => this.searchValues(res))
-    );
-  }
-
-  searchValues(searchTerm: string) {
-    return this.options.filter(
-      (el) =>
-        el.toLocaleLowerCase().search(searchTerm.toLocaleLowerCase()) !== -1
-    );
   }
 
   public createPatient(): void {
@@ -79,6 +62,14 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  public postDoctor() {
+    if (this.formCreateDoctor.valid) {
+      this.homeService
+        .postDoctor(this.formCreateDoctor.value)
+        .subscribe((res) => this.formCreateDoctor.reset());
+    }
+  }
+
   private createForm(): void {
     this.formCreatePatient = this.fb.group({
       name: ['', Validators.required],
@@ -91,10 +82,10 @@ export class HomeComponent implements OnInit {
     });
 
     this.formCreateDoctor = this.fb.group({
-      name: [''],
-      email: [''],
-      crm: [''],
-      specialty: [''],
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      crm: ['', Validators.required],
+      specialty: ['', Validators.required],
     });
   }
 

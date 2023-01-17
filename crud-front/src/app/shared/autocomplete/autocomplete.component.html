@@ -1,24 +1,39 @@
 <div class="autocomplete">
-  <mat-form-field appearance="outline" class="teste">
-    <mat-label>label</mat-label>
-    <input [formControl]="input" matInput (click)="changeHide()" />
-  </mat-form-field>
+  <div class="teste">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ label }}</mat-label>
+
+      <input
+        [value]="value"
+        [formControl]="input"
+        matInput
+        (click)="changeHide()"
+        [placeholder]="value ? value : placeholde"
+      />
+    </mat-form-field>
+  </div>
 
   <div *ngIf="hide">
     <div *ngIf="filtro$ | async; else teste" class="options-dropdown">
-      <div *ngFor="let item of filtro$ | async">
-        {{ item }}
-        <mat-divider></mat-divider>
+      <div *ngFor="let item of filtro$ | async" class="item">
+        <div class="item" (click)="selectOption(item)">
+          <p>
+            {{ item }}
+          </p>
+          <mat-divider></mat-divider>
+        </div>
       </div>
     </div>
 
     <ng-template #teste>
       <div class="options-dropdown">
-        <div *ngFor="let item of list" class="item">
-          <p>
-            {{ item }}
-          </p>
-          <mat-divider></mat-divider>
+        <div *ngFor="let item of list">
+          <div class="item" (click)="selectOption(item)">
+            <p>
+              {{ item }}
+            </p>
+            <mat-divider></mat-divider>
+          </div>
         </div>
       </div>
     </ng-template>
