@@ -35,6 +35,10 @@ export class HomeService {
   deletePatient(headers: number): Observable<any> {
     return this.http.delete(`${ServicesUrls.BACK_LOCAL}/patient/${headers}`);
   }
+
+  desactiveDoctor(headers: number): Observable<any>{
+    return this.http.delete(`${ServicesUrls.BACK_LOCAL}/doctor/${headers}`)
+  }
 }
 
 export interface CreatePatient {

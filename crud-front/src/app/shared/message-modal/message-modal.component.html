@@ -1,0 +1,26 @@
+<ng-template #modalNewDoctor>
+  <div class="modal-header">
+    <div *ngIf="icon">
+      <mat-icon matSuffix>{{ icon }}</mat-icon>
+    </div>
+    <h1 class="mb-2 mt-0">{{ title }}</h1>
+  </div>
+
+  <div class="modal-body">
+    <p>{{ message }}</p>
+  </div>
+
+  <div class="modal-footer col-lg-12">
+    <button mat-button color="primary" class="mr-1" (click)="closeModal()">
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="closeModal()"
+      type="submit"
+    >
+      {{ bntPrimary }}
+    </button>
+  </div>
+</ng-template>

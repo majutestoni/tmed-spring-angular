@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { HomeService } from '../home.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { HomeService } from '../home.service';
 export class DoctorsComponent implements OnInit {
   public doctors: Doctor[] = [];
   displayedColumns: string[] = ['name', 'email', 'specialty', 'options'];
+  @Input() reloadt: Subject<boolean> = new Subject<boolean>();
 
   constructor(private homeService: HomeService) {}
 
@@ -16,6 +18,15 @@ export class DoctorsComponent implements OnInit {
     this.homeService.getDoctors().subscribe((res) => {
       this.doctors = res;
     });
+    this.reloadt.subscribe((res) => {
+      if (res) {
+        this.ngOnInit();
+      }
+    });
+  }
+
+  desactiveDoctor(id: number) {
+    this.homeService.desactiveDoctor(id).subscribe((res) => this.ngOnInit());
   }
 }
 

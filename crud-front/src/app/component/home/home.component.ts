@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
 import { Specialty } from './doctors/doctors.component';
 import { HomeService } from './home.service';
@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
 
   public formCreatePatient!: FormGroup;
   public formCreateDoctor!: FormGroup;
+  public reloadPatient: Subject<boolean> = new Subject<boolean>();
+  public reloadDoctor: Subject<boolean> = new Subject<boolean>();
 
   public options = [
     'ORTHOPEDIST',
@@ -58,7 +60,10 @@ export class HomeComponent implements OnInit {
     if (this.formCreatePatient.valid) {
       this.homeService
         .postPatient(this.formCreatePatient.value)
-        .subscribe((res) => this.formCreatePatient.reset());
+        .subscribe((res) => {
+          this.formCreatePatient.reset();
+          this.reloadPatient.next(true);
+        });
     }
   }
 
@@ -66,7 +71,10 @@ export class HomeComponent implements OnInit {
     if (this.formCreateDoctor.valid) {
       this.homeService
         .postDoctor(this.formCreateDoctor.value)
-        .subscribe((res) => this.formCreateDoctor.reset());
+        .subscribe((res) => {
+          this.formCreateDoctor.reset();
+          this.reloadDoctor.next(true);
+        });
     }
   }
 

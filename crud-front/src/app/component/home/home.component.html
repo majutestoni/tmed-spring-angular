@@ -1,4 +1,4 @@
-<div class="ml-5">
+<div class="teste">
   <div class="mt-4 d-flex doctors">
     <button
       (click)="createDoctor()"
@@ -9,7 +9,7 @@
       <h2>+</h2>
     </button>
     <div class="doctors">
-      <app-doctors></app-doctors>
+      <app-doctors [reloadt]="reloadDoctor"></app-doctors>
     </div>
   </div>
   <div class="mt-4 d-flex doctors">
@@ -22,7 +22,7 @@
       <h2>+</h2>
     </button>
     <div class="doctors">
-      <app-patients></app-patients>
+      <app-patients [reloadt]="reloadPatient"></app-patients>
     </div>
   </div>
 </div>
