@@ -8,3 +8,4 @@ CREATE TABLE patients(
     primary key(id)
 );
 
+

@@ -1,0 +1,55 @@
+<button
+  mat-fab
+  color="primary"
+  aria-label="Example icon button with a delete icon"
+>
+  <h2>+</h2>
+</button>
+<div class="stepper">
+  <mat-stepper #stepper>
+    <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Escolha o médico</ng-template>
+        <mat-form-field appearance="outline" class="col-md-8 col-12">
+          <mat-label>Nome</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-8 col-12">
+          <mat-label>Código</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step
+      [stepControl]="secondFormGroup"
+      errorMessage="Address is required."
+    >
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Escolha o paciente</ng-template>
+        <mat-form-field appearance="outline" class="col-md-8 col-12">
+          <mat-label>Nome</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-8 col-12">
+          <mat-label>Código</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Voltar</button>
+          <button mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Escolha o horario</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Voltar</button>
+        <button mat-button (click)="stepper.reset()">Final</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

@@ -12,9 +12,13 @@ export class PatientsComponent implements OnInit {
   public patients: Patient[] = [];
   displayedColumns: string[] = ['name', 'email', 'phone', 'options'];
   @Input() reloadt: Subject<boolean> = new Subject<boolean>();
+  public totalPages = 0;
 
   ngOnInit(): void {
-    this.homeService.getPatients().subscribe((res) => (this.patients = res));
+    this.homeService.getPatients().subscribe((res) => {
+      this.patients = res.content;
+      this.totalPages = res.totalPages;
+    });
     this.reloadt.subscribe((res) => {
       if (res) {
         this.ngOnInit();
@@ -24,6 +28,15 @@ export class PatientsComponent implements OnInit {
 
   deletePatient(id: number): void {
     this.homeService.deletePatient(id).subscribe((res) => this.ngOnInit());
+  }
+
+  changePage(event: any) {
+    this.homeService
+      .getPatients(event.pageSize, event.pageIndex)
+      .subscribe((res) => {
+        this.patients = res.content;
+        this.totalPages = res.totalPages;
+      });
   }
 }
 

@@ -12,23 +12,31 @@ import { Doctor, Specialty } from './doctors/doctors.component';
 export class HomeService {
   constructor(private http: HttpClient) {}
 
-  getPatients(): Observable<any> {
-    return this.http
-      .get<Patient>(`${ServicesUrls.BACK_LOCAL}/patient`)
-      .pipe(pluck('content'));
+  getPatients(pageSize?: number, pageIndex?: number): Observable<any> {
+    if (pageSize && pageSize) {
+      return this.http.get<Patient>(
+        `${ServicesUrls.BACK_LOCAL}/patient?size=${pageSize}&page=${pageIndex}`
+      );
+    }
+    return this.http.get<Patient>(`${ServicesUrls.BACK_LOCAL}/patient`);
+    //.pipe(pluck('content'));
   }
 
-  getDoctors(): Observable<any> {
-    return this.http
-      .get<Doctor>(`${ServicesUrls.BACK_LOCAL}/doctor`)
-      .pipe(pluck('content'));
+  getDoctors(pageSize?: number, pageIndex?: number): Observable<any> {
+    if (pageSize && pageSize) {
+      return this.http.get<Doctor>(
+        `${ServicesUrls.BACK_LOCAL}/doctor?size=${pageSize}&page=${pageIndex}`
+      );
+    }
+    return this.http.get<Doctor>(`${ServicesUrls.BACK_LOCAL}/doctor`);
+    //.pipe(pluck('content'));
   }
 
   postPatient(headers: CreatePatient): Observable<any> {
     return this.http.post(`${ServicesUrls.BACK_LOCAL}/patient`, headers);
   }
 
-  postDoctor(headers: CreateDoctor): Observable<any>{
+  postDoctor(headers: CreateDoctor): Observable<any> {
     return this.http.post(`${ServicesUrls.BACK_LOCAL}/doctor`, headers);
   }
 
@@ -36,8 +44,8 @@ export class HomeService {
     return this.http.delete(`${ServicesUrls.BACK_LOCAL}/patient/${headers}`);
   }
 
-  desactiveDoctor(headers: number): Observable<any>{
-    return this.http.delete(`${ServicesUrls.BACK_LOCAL}/doctor/${headers}`)
+  desactiveDoctor(headers: number): Observable<any> {
+    return this.http.delete(`${ServicesUrls.BACK_LOCAL}/doctor/${headers}`);
   }
 }
 
@@ -53,9 +61,9 @@ export interface CreateAddress {
   uf: string;
 }
 
-export interface CreateDoctor{
-  name: string
-  email: string
-  crm: string
-  specialty: Specialty
+export interface CreateDoctor {
+  name: string;
+  email: string;
+  crm: string;
+  specialty: Specialty;
 }

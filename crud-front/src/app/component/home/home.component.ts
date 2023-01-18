@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
   public formCreateDoctor!: FormGroup;
   public reloadPatient: Subject<boolean> = new Subject<boolean>();
   public reloadDoctor: Subject<boolean> = new Subject<boolean>();
-
   public options = [
     'ORTHOPEDIST',
     'DERMATOLOGIST',
@@ -66,7 +65,6 @@ export class HomeComponent implements OnInit {
         });
     }
   }
-
   public postDoctor() {
     if (this.formCreateDoctor.valid) {
       this.homeService

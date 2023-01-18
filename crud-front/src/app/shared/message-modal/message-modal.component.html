@@ -1,4 +1,4 @@
-<ng-template #modalNewDoctor>
+<ng-template #modal>
   <div class="modal-header">
     <div *ngIf="icon">
       <mat-icon matSuffix>{{ icon }}</mat-icon>
@@ -17,7 +17,7 @@
     <button
       mat-raised-button
       color="primary"
-      (click)="closeModal()"
+      (click)="clicked.emit($event)"
       type="submit"
     >
       {{ bntPrimary }}

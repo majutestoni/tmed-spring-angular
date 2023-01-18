@@ -7,7 +7,7 @@ import { MessageModalComponent } from './message-modal/message-modal.component';
 
 @NgModule({
   imports: [CommonModule, ModalFormlModule, AppMaterialModule],
-  exports: [AppMaterialModule, ModalFormlModule, AutocompleteComponent],
+  exports: [AppMaterialModule, ModalFormlModule, AutocompleteComponent, MessageModalComponent],
   declarations: [AutocompleteComponent, MessageModalComponent],
 })
 export class SharedModule {}

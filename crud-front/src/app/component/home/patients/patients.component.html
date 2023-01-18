@@ -32,4 +32,13 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+  <mat-paginator
+    class="mat-elevation-z8"
+    [length]="totalPages"
+    [pageSize]="5"
+    [pageSizeOptions]="[1, 5, 10]"
+    aria-label="Select page"
+    (page)="changePage($event)"
+  >
+  </mat-paginator>
 </div>

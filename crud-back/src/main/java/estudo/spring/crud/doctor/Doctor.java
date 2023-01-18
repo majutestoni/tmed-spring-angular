@@ -1,10 +1,13 @@
 package estudo.spring.crud.doctor;
 
+import estudo.spring.crud.appointment.Appointment;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "doctors")
@@ -22,6 +25,33 @@ public class Doctor {
     private Specialty specialty;
     private String crm;
     private boolean active;
+
+    @OneToMany(mappedBy = "doctor")
+    private List<Appointment> appointments;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setSpecialty(Specialty specialty) {
+        this.specialty = specialty;
+    }
+
+    public void setCrm(String crm) {
+        this.crm = crm;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     public Doctor(DataRegisterDoctor doctor) {
         this.name = doctor.name();

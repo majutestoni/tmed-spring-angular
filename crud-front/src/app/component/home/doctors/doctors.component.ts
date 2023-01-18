@@ -11,12 +11,15 @@ export class DoctorsComponent implements OnInit {
   public doctors: Doctor[] = [];
   displayedColumns: string[] = ['name', 'email', 'specialty', 'options'];
   @Input() reloadt: Subject<boolean> = new Subject<boolean>();
+  public openDoctor = false;
+  public totalPages = 0;
 
   constructor(private homeService: HomeService) {}
 
   ngOnInit(): void {
     this.homeService.getDoctors().subscribe((res) => {
-      this.doctors = res;
+      this.doctors = res.content;
+      this.totalPages = res.totalPages;
     });
     this.reloadt.subscribe((res) => {
       if (res) {
@@ -25,8 +28,24 @@ export class DoctorsComponent implements OnInit {
     });
   }
 
+  changePage(event: any) {
+    this.homeService
+      .getDoctors(event.pageSize, event.pageIndex)
+      .subscribe((res) => {
+        this.doctors = res.content;
+        this.totalPages = res.totalPages;
+      });
+  }
+
+  public excluir() {
+    this.openDoctor = true;
+  }
+
   desactiveDoctor(id: number) {
-    this.homeService.desactiveDoctor(id).subscribe((res) => this.ngOnInit());
+    this.homeService.desactiveDoctor(id).subscribe((res) => {
+      this.ngOnInit();
+      this.openDoctor = false;
+    });
   }
 }
 

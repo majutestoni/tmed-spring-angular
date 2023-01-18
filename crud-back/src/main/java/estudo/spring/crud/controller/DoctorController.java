@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class DoctorController {
 
     @PostMapping
     @Transactional
-    void createDoctor(@RequestBody @Valid DataRegisterDoctor doctor) {
+    void createDoctor(@PageableDefault(size = 5) @RequestBody @Valid DataRegisterDoctor doctor) {
         doctorRepository.save(new Doctor(doctor));
     }
 
@@ -36,7 +37,7 @@ public class DoctorController {
 
     @PutMapping
     @Transactional
-    void updateDoctor(@RequestBody @Valid DataUpdateDoctor json){
+    void updateDoctor(@RequestBody @Valid DataUpdateDoctor json) {
         var doctor = doctorRepository.getReferenceById(json.id());
         doctor.updateData(json);
     }

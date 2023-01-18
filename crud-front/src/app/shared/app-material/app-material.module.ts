@@ -5,7 +5,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatStepperModule } from '@angular/material/stepper';
 
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   exports: [
     MatButtonModule,
@@ -14,6 +17,9 @@ import { MatDividerModule } from '@angular/material/divider';
     MatIconModule,
     MatDialogModule,
     MatDividerModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    MatStepperModule,
   ],
 })
 export class AppMaterialModule {}

@@ -1,11 +1,14 @@
 package estudo.spring.crud.patient;
 
 import estudo.spring.crud.address.Address;
+import estudo.spring.crud.appointment.Appointment;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "patients")
@@ -24,6 +27,30 @@ public class Patient {
 
     @Embedded
     private Address address;
+
+    @OneToMany(mappedBy = "patient")
+    List<Appointment> appointments;
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public Patient(DataRegisterPatient patient) {
         this.name = patient.name();
