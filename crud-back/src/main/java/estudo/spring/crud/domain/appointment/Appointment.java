@@ -1,7 +1,7 @@
-package estudo.spring.crud.appointment;
+package estudo.spring.crud.domain.appointment;
 
-import estudo.spring.crud.doctor.Doctor;
-import estudo.spring.crud.patient.Patient;
+import estudo.spring.crud.domain.doctor.Doctor;
+import estudo.spring.crud.domain.patient.Patient;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

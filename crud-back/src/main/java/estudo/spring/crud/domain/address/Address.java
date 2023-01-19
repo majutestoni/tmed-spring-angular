@@ -1,4 +1,4 @@
-package estudo.spring.crud.address;
+package estudo.spring.crud.domain.address;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

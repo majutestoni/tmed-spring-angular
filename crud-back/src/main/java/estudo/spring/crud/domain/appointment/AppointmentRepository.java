@@ -1,4 +1,4 @@
-package estudo.spring.crud.appointment;
+package estudo.spring.crud.domain.appointment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

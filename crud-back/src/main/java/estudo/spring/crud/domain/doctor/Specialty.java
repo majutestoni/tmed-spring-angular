@@ -1,4 +1,4 @@
-package estudo.spring.crud.doctor;
+package estudo.spring.crud.domain.doctor;
 
 public enum Specialty {
     ORTHOPEDIST, DERMATOLOGIST, CARDIOLOGIST, NEUROLOGIST

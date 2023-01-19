@@ -1,6 +1,6 @@
-package estudo.spring.crud.patient;
+package estudo.spring.crud.domain.patient;
 
-import estudo.spring.crud.address.DataRegisterAddress;
+import estudo.spring.crud.domain.address.DataRegisterAddress;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

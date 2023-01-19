@@ -1,4 +1,4 @@
-package estudo.spring.crud.patient;
+package estudo.spring.crud.domain.patient;
 
 public record DataListPatient(Long id, String name, String email, String phone) {
 

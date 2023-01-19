@@ -1,4 +1,4 @@
-package estudo.spring.crud.doctor;
+package estudo.spring.crud.domain.doctor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

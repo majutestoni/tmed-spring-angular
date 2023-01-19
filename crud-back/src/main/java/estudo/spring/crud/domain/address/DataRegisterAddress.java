@@ -1,4 +1,4 @@
-package estudo.spring.crud.address;
+package estudo.spring.crud.domain.address;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

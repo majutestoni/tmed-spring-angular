@@ -1,4 +1,4 @@
-package estudo.spring.crud.appointment;
+package estudo.spring.crud.domain.appointment;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

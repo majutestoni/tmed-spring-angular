@@ -1,4 +1,4 @@
-package estudo.spring.crud.doctor;
+package estudo.spring.crud.domain.doctor;
 
 import jakarta.validation.constraints.NotNull;
 
