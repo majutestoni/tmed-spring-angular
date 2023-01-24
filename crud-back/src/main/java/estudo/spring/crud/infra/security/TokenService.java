@@ -1,0 +1,49 @@
+package estudo.spring.crud.infra.security;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import estudo.spring.crud.domain.user.User;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
+@Service
+public class TokenService {
+    @Value("t.med.security.secret")
+    private String secret;
+
+    public String generateToken(User user) {
+        try {
+            var algorithm = Algorithm.HMAC256(secret);
+            return JWT.create()
+                    .withIssuer("t.med")
+                    .withSubject(user.getUsername())
+                    .withExpiresAt(closeOn())
+                    .sign(algorithm);
+        } catch (JWTCreationException exception) {
+            throw new RuntimeException("erro ao gerrar token jwt", exception);
+        }
+    }
+
+    public String getSubject(String tokenJWT){
+        try {
+            var algorithm = Algorithm.HMAC256(secret);
+            return JWT.require(algorithm)
+                    .withIssuer("t.med")
+                    .build()
+                    .verify(tokenJWT)
+                    .getSubject();
+        } catch (JWTVerificationException exception) {
+            throw new RuntimeException("Invalid Token");
+        }
+    }
+
+    private Instant closeOn() {
+        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+    }
+}

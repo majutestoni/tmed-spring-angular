@@ -7,35 +7,32 @@
 </button>
 <div class="stepper">
   <mat-stepper #stepper>
-    <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Escolha o médico</ng-template>
+    <mat-step [stepControl]="choosePatient" errorMessage="Name is required.">
+      <form [formGroup]="choosePatient">
+        <ng-template matStepLabel>Escolha o paciente</ng-template>
         <mat-form-field appearance="outline" class="col-md-8 col-12">
           <mat-label>Nome</mat-label>
-          <input matInput />
+          <input formControlName="name" matInput />
         </mat-form-field>
         <mat-form-field appearance="outline" class="col-md-8 col-12">
           <mat-label>Código</mat-label>
-          <input matInput />
+          <input formControlName="id" matInput />
         </mat-form-field>
         <div>
           <button mat-button matStepperNext>Próximo</button>
         </div>
       </form>
     </mat-step>
-    <mat-step
-      [stepControl]="secondFormGroup"
-      errorMessage="Address is required."
-    >
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Escolha o paciente</ng-template>
+    <mat-step [stepControl]="chooseDoctor" errorMessage="Address is required.">
+      <form [formGroup]="chooseDoctor">
+        <ng-template matStepLabel>Escolha o medico</ng-template>
         <mat-form-field appearance="outline" class="col-md-8 col-12">
           <mat-label>Nome</mat-label>
-          <input matInput />
+          <input formControlName="name" matInput />
         </mat-form-field>
         <mat-form-field appearance="outline" class="col-md-8 col-12">
           <mat-label>Código</mat-label>
-          <input matInput />
+          <input formControlName="id" matInput />
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Voltar</button>
@@ -43,13 +40,24 @@
         </div>
       </form>
     </mat-step>
-    <mat-step>
+    <mat-step [stepControl]="chooseTime">
       <ng-template matStepLabel>Escolha o horario</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Voltar</button>
-        <button mat-button (click)="stepper.reset()">Final</button>
-      </div>
+      <form>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dateA" />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Voltar</button>
+          <button mat-button (click)="teste()">Final</button>
+        </div>
+      </form>
     </mat-step>
   </mat-stepper>
 </div>

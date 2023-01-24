@@ -29,9 +29,16 @@ public class AppointmentController {
     }
 
     @GetMapping
-    ResponseEntity<Page> getAppointment(Pageable pageable){
+    ResponseEntity<Page> getAppointments(Pageable pageable){
         var page = appointmentRepository.findAll(pageable).map(DataListAppointment::new);
         return  ResponseEntity.ok(page);
     }
+
+    @GetMapping("/{id}")
+    ResponseEntity getAppointment(@PathVariable Long id){
+        var appointment = appointmentRepository.getReferenceById(id);
+        return  ResponseEntity.ok(new DataListAppointment(appointment));
+    }
+
 
 }
