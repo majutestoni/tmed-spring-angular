@@ -4,9 +4,8 @@
       (click)="createDoctor()"
       mat-fab
       color="primary"
-      aria-label="Example icon button with a delete icon"
-    >
-      <h2>+</h2>
+      class="plus"
+    >+
     </button>
     <div class="doctors">
       <app-doctors [reloadt]="reloadDoctor"></app-doctors>
@@ -17,9 +16,9 @@
       (click)="createPatient()"
       mat-fab
       color="primary"
-      aria-label="Example icon button with a delete icon"
+      class="plus"
     >
-      <h2>+</h2>
+    +
     </button>
     <div class="doctors">
       <app-patients [reloadt]="reloadPatient"></app-patients>
@@ -29,21 +28,21 @@
 
 <ng-template #modalNewDoctor>
   <div class="modal-header">
-    <h1 class="mb-2 mt-0">Criar Medico</h1>
+    <h1 class="mb-2 mt-0">{{'tmed_create_doctor' | translate }}</h1>
   </div>
 
   <div class="modal-body">
     <form [formGroup]="formCreateDoctor" class="row">
       <mat-form-field appearance="outline" class="col-md-8 col-12">
-        <mat-label>Nome</mat-label>
+        <mat-label>{{'name'| translate}}</mat-label>
         <input matInput formControlName="name" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="col-md-4 col-12">
-        <mat-label>crm</mat-label>
+        <mat-label>{{'crm'|translate}}</mat-label>
         <input matInput formControlName="crm" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="col-md-8 col-12">
-        <mat-label>Email</mat-label>
+        <mat-label>{{'email' | translate}}</mat-label>
         <input
           type="email"
           matInput

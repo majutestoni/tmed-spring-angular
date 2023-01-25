@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HomeService } from '../home.service';
 
@@ -6,13 +6,17 @@ import { HomeService } from '../home.service';
   selector: 'app-doctors',
   templateUrl: './doctors.component.html',
   styleUrls: ['./doctors.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
+
+
 export class DoctorsComponent implements OnInit {
   public doctors: Doctor[] = [];
   displayedColumns: string[] = ['name', 'email', 'specialty', 'options'];
   @Input() reloadt: Subject<boolean> = new Subject<boolean>();
   public openDoctor = false;
   public totalPages = 0;
+
 
   constructor(private homeService: HomeService) {}
 
