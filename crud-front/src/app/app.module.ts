@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from './shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,9 +21,25 @@ import { SharedModule } from './shared/shared.module';
     MatIconModule,
     MatButtonModule,
     NgbModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+return new TranslateHttpLoader(http, './assets/', '.json');
+}

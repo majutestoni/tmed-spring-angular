@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
 import { Specialty } from './doctors/doctors.component';
@@ -36,8 +37,15 @@ export class HomeComponent implements OnInit {
     private fb: FormBuilder,
     public dialog: MatDialog,
     private modal: NgbModal,
-    private homeService: HomeService
-  ) {}
+    private homeService: HomeService,
+    private translate: TranslateService
+  ) {
+    translate.setDefaultLang('pt-BR');
+    this.translate.addLangs(['en', 'pt-BR'])
+    this.translate.setDefaultLang('pt-BR')
+    const browserLang = this.translate.getBrowserLang()
+    this.translate.use(browserLang.match(/pt-BR|en/) ? browserLang : 'pt-BR')
+  }
 
   ngOnInit(): void {
     this.createForm();
