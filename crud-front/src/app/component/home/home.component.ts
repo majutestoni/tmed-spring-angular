@@ -41,10 +41,10 @@ export class HomeComponent implements OnInit {
     private translate: TranslateService
   ) {
     translate.setDefaultLang('pt-BR');
-    this.translate.addLangs(['en', 'pt-BR'])
-    this.translate.setDefaultLang('pt-BR')
-    const browserLang = this.translate.getBrowserLang()
-    this.translate.use(browserLang.match(/pt-BR|en/) ? browserLang : 'pt-BR')
+    this.translate.addLangs(['en', 'pt-BR']);
+    this.translate.setDefaultLang('pt-BR');
+    const browserLang = this.translate.getBrowserLang();
+    this.translate.use(browserLang.match(/pt-BR|en/) ? browserLang : 'pt-BR');
   }
 
   ngOnInit(): void {
@@ -74,6 +74,7 @@ export class HomeComponent implements OnInit {
     }
   }
   public postDoctor() {
+
     if (this.formCreateDoctor.valid) {
       this.homeService
         .postDoctor(this.formCreateDoctor.value)
@@ -82,6 +83,10 @@ export class HomeComponent implements OnInit {
           this.reloadDoctor.next(true);
         });
     }
+  }
+
+  public selectOtion(item: any) {
+    this.formCreateDoctor.get('specialty')?.setValue(item);
   }
 
   private createForm(): void {

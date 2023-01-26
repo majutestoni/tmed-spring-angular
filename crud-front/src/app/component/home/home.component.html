@@ -1,24 +1,15 @@
 <div class="teste">
   <div class="mt-4 d-flex doctors">
-    <button
-      (click)="createDoctor()"
-      mat-fab
-      color="primary"
-      class="plus"
-    >+
+    <button (click)="createDoctor()" mat-fab color="primary" class="plus">
+      +
     </button>
     <div class="doctors">
       <app-doctors [reloadt]="reloadDoctor"></app-doctors>
     </div>
   </div>
   <div class="mt-4 d-flex doctors">
-    <button
-      (click)="createPatient()"
-      mat-fab
-      color="primary"
-      class="plus"
-    >
-    +
+    <button (click)="createPatient()" mat-fab color="primary" class="plus">
+      +
     </button>
     <div class="doctors">
       <app-patients [reloadt]="reloadPatient"></app-patients>
@@ -28,21 +19,21 @@
 
 <ng-template #modalNewDoctor>
   <div class="modal-header">
-    <h1 class="mb-2 mt-0">{{'tmed_create_doctor' | translate }}</h1>
+    <h1 class="mb-2 mt-0">{{ "tmed_create_doctor" | translate }}</h1>
   </div>
 
   <div class="modal-body">
     <form [formGroup]="formCreateDoctor" class="row">
       <mat-form-field appearance="outline" class="col-md-8 col-12">
-        <mat-label>{{'name'| translate}}</mat-label>
+        <mat-label>{{ "name" | translate }}</mat-label>
         <input matInput formControlName="name" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="col-md-4 col-12">
-        <mat-label>{{'crm'|translate}}</mat-label>
+        <mat-label>{{ "crm" | translate }}</mat-label>
         <input matInput formControlName="crm" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="col-md-8 col-12">
-        <mat-label>{{'email' | translate}}</mat-label>
+        <mat-label>{{ "email" | translate }}</mat-label>
         <input
           type="email"
           matInput
@@ -51,13 +42,12 @@
         />
       </mat-form-field>
 
-      <select
-        class="form-select col-md-3 col-12"
-        aria-label="Default select example"
-        formControlName="specialty"
-      >
-        <option [value]="item" *ngFor="let item of options">{{ item }}</option>
-      </select>
+      <div>
+        <app-autocomplete
+          [options]="options"
+          (clicked)="selectOtion($event)"
+        ></app-autocomplete>
+      </div>
     </form>
   </div>
 

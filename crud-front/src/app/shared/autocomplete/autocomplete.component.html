@@ -1,5 +1,5 @@
 <div class="autocomplete">
-  <div class="teste">
+  <div class="autocomplete-input">
     <mat-form-field appearance="outline">
       <mat-label>{{ label }}</mat-label>
 
@@ -14,7 +14,7 @@
   </div>
 
   <div *ngIf="hide">
-    <div *ngIf="filtro$ | async; else teste" class="options-dropdown">
+    <div *ngIf="filtro$ | async; else noFilter" class="options-dropdown">
       <div *ngFor="let item of filtro$ | async" class="item">
         <div class="item" (click)="selectOption(item)">
           <p>
@@ -25,16 +25,9 @@
       </div>
     </div>
 
-    <ng-template #teste>
-      <div class="options-dropdown">
-        <div *ngFor="let item of list">
-          <div class="item" (click)="selectOption(item)">
-            <p>
-              {{ item }}
-            </p>
-            <mat-divider></mat-divider>
-          </div>
-        </div>
+    <ng-template #noFilter>
+      <div class="options-dropdown" *ngIf="hide">
+        <app-autocomplete-item [options]="options" (clicked)="selectOption($event)"></app-autocomplete-item>
       </div>
     </ng-template>
   </div>

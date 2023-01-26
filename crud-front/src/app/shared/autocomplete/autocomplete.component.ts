@@ -18,22 +18,28 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss'],
 })
-export class AutocompleteComponent implements OnInit, OnChanges {
-  @Input() public list: string[] = [];
-  public listPesquisa = [];
-  public input = new FormControl();
-  @Input() control = '';
-  public filtro$: Observable<any> | undefined;
-  public isSearch = false;
-  public hide = false;
+export class AutocompleteComponent implements OnInit {
+  @Input() public options: string[] = [];
   @Input() public placeholde = '';
   @Input() public value = '';
   @Input() public label = '';
+  @Output() public clicked = new EventEmitter();
+
+  public listPesquisa = [];
+  public input = new FormControl();
+  public filtro$: Observable<any> | undefined;
+  public isSearch = false;
+  public hide = false;
 
   constructor(private fb: FormBuilder, private elementRef: ElementRef) {}
 
-  ngOnChanges(): void {
-    this.changeHide();
+  @HostListener('document:click', ['$event'])
+  closeItens(event: MouseEvent) {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      if (this.hide) {
+        this.hide = false;
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -50,13 +56,13 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   }
 
   selectOption(item: any) {
-    this.placeholde = item;
-    console.log(this.placeholde);
+    this.value = item;
+    this.clicked.emit(item);
+    this.hide = false;
   }
 
   searchValues(searchTerm: string) {
-    console.log('a');
-    return this.list.filter(
+    return this.options.filter(
       (el) =>
         el.toLocaleLowerCase().search(searchTerm.toLocaleLowerCase()) !== -1
     );

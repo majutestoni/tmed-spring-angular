@@ -1,4 +1,4 @@
-.teste {
+.autocomplete-input {
   width: 100%;
 }
 
@@ -25,7 +25,6 @@ p {
 }
 
 .item:hover {
-  transform: scale(1.1);
   background-color: #e6e6e6ef;
   color: rgb(41, 41, 41);
 
@@ -35,9 +34,9 @@ p {
   }
 }
 .options-dropdown {
-  width: 40%;
-  margin-top: -3%;
   position: absolute;
+  width: 20%;
+  margin-top: -2%;
   z-index: 1;
   box-shadow: 1px 3px 10px rgba(#000, 0.2);
   overflow-y: 250px;

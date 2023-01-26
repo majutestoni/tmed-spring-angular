@@ -1,0 +1,19 @@
+.item {
+  transition: 500ms linear;
+  width: 15rem;
+}
+
+.item:hover {
+  background-color: #e6e6e6ef;
+  color: rgb(41, 41, 41);
+
+  p {
+    margin-left: 5%;
+    margin-top: 1%;
+  }
+}
+
+p {
+  margin: 1% 4%;
+  cursor: pointer;
+}
