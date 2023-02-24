@@ -1,5 +1,6 @@
 package estudo.spring.crud.domain.appointment;
 
+import estudo.spring.crud.domain.doctor.Specialty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -14,6 +15,7 @@ public record DataRegisterAppointment(
         @NotNull
         LocalDate dateA,
         @NotNull
-        LocalTime timeA
+        LocalTime timeA,
+        Specialty specialty
 ) {
 }

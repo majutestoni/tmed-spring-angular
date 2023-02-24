@@ -1,9 +1,6 @@
 package estudo.spring.crud.controller;
 
-import estudo.spring.crud.domain.appointment.Appointment;
-import estudo.spring.crud.domain.appointment.AppointmentRepository;
-import estudo.spring.crud.domain.appointment.DataListAppointment;
-import estudo.spring.crud.domain.appointment.DataRegisterAppointment;
+import estudo.spring.crud.domain.appointment.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +16,16 @@ public class AppointmentController {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
+    @Autowired
+    private AppointmentRegister appointmentRegister;
+
     @PostMapping
     @Transactional
     ResponseEntity postAppointment(@RequestBody @Valid DataRegisterAppointment appointment, UriComponentsBuilder builder) {
         var data = new Appointment(appointment);
         appointmentRepository.save(data);
         var uri = builder.path("/appointment/{id}").buildAndExpand(data.getId()).toUri();
+        appointmentRegister.agendar(appointment);
         return ResponseEntity.created(uri).body(data);
     }
 
