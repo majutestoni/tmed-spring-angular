@@ -1,5 +1,6 @@
 package estudo.spring.crud.infra;
 
+import estudo.spring.crud.domain.appointment.validationAppointment;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -19,6 +20,11 @@ public class ErrorHandling {
     public ResponseEntity handlingError400(MethodArgumentNotValidException ex) {
         var errors = ex.getFieldErrors();
         return ResponseEntity.badRequest().body(errors.stream().map(DataErrorValidation::new).toList());
+    }
+
+    @ExceptionHandler(validationAppointment.class)
+    public ResponseEntity error403(validationAppointment ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
     private record DataErrorValidation(String field, String message) {

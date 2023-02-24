@@ -22,11 +22,7 @@ public class AppointmentController {
     @PostMapping
     @Transactional
     ResponseEntity postAppointment(@RequestBody @Valid DataRegisterAppointment appointment, UriComponentsBuilder builder) {
-        var data = new Appointment(appointment);
-        appointmentRepository.save(data);
-        var uri = builder.path("/appointment/{id}").buildAndExpand(data.getId()).toUri();
-        appointmentRegister.agendar(appointment);
-        return ResponseEntity.created(uri).body(data);
+        return   appointmentRegister.agendar(appointment, builder);
     }
 
     @GetMapping

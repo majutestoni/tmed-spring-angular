@@ -11,7 +11,6 @@ import java.time.LocalDate;
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     Page<Doctor> findAllByActiveTrue(Pageable pageable);
 
-    @Query("select d from Doctor d where m.active = 1 and m.specialty = :specialty " +
-            "and m.id not in(select a.doctor from Appointment a where a.date = :dateA) order by rand() limit 1")
+    @Query(value = "select d from doctors d where d.active = 1 and d.specialty = :specialty and d.id not in(select a.doctor from appointments a where a.dateA = :dateA) order by rand() limit 1", nativeQuery = true)
     Doctor choseDoctor(Specialty specialty, LocalDate dateA);
 }
